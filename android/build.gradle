@@ -1,9 +1,24 @@
-allprojects {
+buildscript {
+    ext.kotlin_version = '1.8.22' // Make sure this is the version you want to use
     repositories {
         google()
         mavenCentral()
     }
+
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.4.2' // Ensure this matches the version of your Android Gradle plugin
+    }
 }
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
 
 rootProject.buildDir = "../build"
 subprojects {

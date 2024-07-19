@@ -8,39 +8,35 @@ import UIKit
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-    let batteryChannel = FlutterMethodChannel(name: "samples.flutter.dev/ios",
+    channel = FlutterMethodChannel(name: "samples.flutter.dev/channel",
                                               binaryMessenger: controller.binaryMessenger)
    
-    batteryChannel.setMethodCallHandler({
+        channel!.setMethodCallHandler({
       [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
       // This method is invoked on the UI thread.
         switch call.method {
-        case "getBatteryLevel":
-             self?.receiveBatteryLevel(result: result)
         case "renderSection":
             self?.renderScreen(arguments: call.arguments)
         default:
             result(FlutterMethodNotImplemented)
         }
+            
+            
     })
 
-//    self.renderScreen(arguments: "{\"section\":\"congratSection\",\"buttonText\":\"See All >\"}")
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
-    private func receiveBatteryLevel(result: FlutterResult) {
-      let device = UIDevice.current
-      device.isBatteryMonitoringEnabled = true
-      if device.batteryState == UIDevice.BatteryState.unknown {
-        result(FlutterError(code: "UNAVAILABLE",
-                            message: "Battery level not available!",
-                            details: nil))
-      } else {
-        result(Int(device.batteryLevel * 100))
-      }
+    @objc private func callFlutterDialog() {
+        guard let inputText = inputTextField?.text else { return }
+        channel?.invokeMethod("showDialog", arguments: inputText)
     }
+    
+    private var channel: FlutterMethodChannel?
+    private var inputTextField: UITextField?
+
 
 
     private func renderScreen(arguments: Any) {
@@ -65,6 +61,18 @@ import UIKit
             label.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: viewController.view.centerYAnchor)
         ])
+        
+        
+        // input field and button
+        inputTextField = UITextField(frame: CGRect(x: 10, y: 200, width: 280, height: 40))
+        inputTextField!.borderStyle = .roundedRect
+        viewController.view.addSubview(inputTextField!)
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 10, y: 250, width: 280, height: 40)
+        button.setTitle("Show Flutter Dialog", for: .normal)
+        button.addTarget(self, action: #selector(callFlutterDialog), for: .touchUpInside)
+        viewController.view.addSubview(button)
+        
         
         // Create "Go Back" button
         let goBackButton = UIButton(type: .system)

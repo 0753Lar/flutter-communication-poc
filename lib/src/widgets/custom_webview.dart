@@ -34,7 +34,7 @@ class _CustomWwebview extends State<CustomWwebview> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-          CustomWebviewModal(webviewController, setWebviewVisible),
+          CustomWebviewModal(webviewController, setWebviewVisible, context),
       child: !webviewVisible
           ? widget.child
           : Scaffold(

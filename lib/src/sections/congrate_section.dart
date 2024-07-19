@@ -1,5 +1,6 @@
 import 'package:custom_widgets/widgets/card_widget.dart';
 import 'package:dashboard/src/utils/native_channel.dart';
+import 'package:dashboard/src/widgets/showCustomDialog.dart';
 import 'package:flutter/material.dart';
 
 class CongrateSection extends StatelessWidget {
@@ -7,6 +8,10 @@ class CongrateSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NativeChannel.onReceiveDialogCallFromNative((data) {
+      showCustomDialog(
+          context: context, title: "Native sent to Flutter: ", content: data);
+    });
     return CardWidget(
         padding: const EdgeInsets.all(0),
         child: Column(
@@ -51,7 +56,6 @@ class CongrateSection extends StatelessWidget {
                     style: TextStyle(fontSize: 16, color: Colors.black54),
                   ),
                   onPressed: () {
-                    // _getBatteryLevel();
                     NativeChannel.renderSection({
                       "section": "congratSection",
                       "buttonText": "See All >"
@@ -62,4 +66,3 @@ class CongrateSection extends StatelessWidget {
         ));
   }
 }
-
