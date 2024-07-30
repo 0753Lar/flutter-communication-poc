@@ -25,7 +25,7 @@ class SecondActivity : AppCompatActivity() {
         val layout = findViewById<LinearLayout>(R.id.dynamic_layout)
 
         val buttonGoBack = Button(this)
-        buttonGoBack.text = "Go Back to Flutter"
+        buttonGoBack.text = "Go Back"
         buttonGoBack.setOnClickListener {
             finish()
         }
@@ -43,11 +43,13 @@ class SecondActivity : AppCompatActivity() {
                     CHANNEL
                 ).invokeMethod("showDialog", inputText)
             }
+            finish()
         }
 
         val params = intent.getStringExtra("params")
         val textView = TextView(this)
         textView.textSize = 20f
+        textView.minHeight = 100
         textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
 
         params?.let {
@@ -64,8 +66,8 @@ class SecondActivity : AppCompatActivity() {
         layoutParams.gravity = android.view.Gravity.CENTER
         textView.layoutParams = layoutParams
 
-        layout.addView(textView)
         layout.addView(buttonGoBack)
+        layout.addView(textView)
         layout.addView(editText)
         layout.addView(button)
     }

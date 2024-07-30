@@ -10,16 +10,16 @@ void showCustomDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(title ?? 'Error'),
-        content: Text(content ?? 'An error occurred while loading the page.'),
+        title: Text(title ?? 'Dialog'),
+        content: Text(content ?? ''),
         actions: <Widget>[
           TextButton(
             child: Text(buttonText ?? 'OK'),
             onPressed: () {
+              Navigator.of(context).pop();
               if (onPressed != null) {
                 onPressed();
               }
-              Navigator.of(context).pop();
             },
           ),
         ],

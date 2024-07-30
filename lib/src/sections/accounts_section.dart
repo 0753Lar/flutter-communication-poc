@@ -13,17 +13,17 @@ class _AccountsSection extends State<AccountsSection> {
   CardProfleData depositsProfile = CardProfleData(
     count: 1,
     currency: Currency.sgd,
-    amount: 2880000,
+    amount: 2100000,
   );
   CardProfleData cardsProfile = CardProfleData(
-    count: 2,
+    count: 11,
     currency: Currency.sgd,
-    amount: 3200,
+    amount: 29999,
   );
   CardProfleData cashlineProfile = CardProfleData(
-    count: 5,
+    count: 2,
     currency: Currency.sgd,
-    amount: 40000,
+    amount: 300.18,
   );
 
   bool mark = false;
@@ -55,7 +55,7 @@ class _AccountsSection extends State<AccountsSection> {
         ],
       ),
       AccountsCardWidget(
-        leadingColor: Colors.amber,
+        // leadingColor: Colors.amber,
         title: "Deposits",
         count: depositsProfile.count,
         label: "Total available balance",
@@ -70,7 +70,7 @@ class _AccountsSection extends State<AccountsSection> {
               leadingColor: Colors.redAccent,
               title: "Cards",
               count: cardsProfile.count,
-              label: "Bills due on 17 Jan",
+              label: "Bills due on 17 Oct",
               currency: cardsProfile.currency,
               amount: mark ? "***" : cardsProfile.amount.toStringAsFixed(2),
             ),
