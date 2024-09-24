@@ -14,3 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Screenshot
+
+<div style="display: flex; flex-wrap: wrap;">
+    <img src="screenshot/screenshot 2024-09-24 11.10.24.png" width="200px"       alt="screenshot" />
+</div>
